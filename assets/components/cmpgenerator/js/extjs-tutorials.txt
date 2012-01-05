@@ -1,0 +1,8 @@
+
+
+Dom Query Basics
+    http://www.sencha.com/learn/domquery-v11-basics/
+
+Ajax:
+    OLD: http://www.sencha.com/learn/legacy/Manual:Core:Ext.Ajax
+    New: http://docs.sencha.com/ext-js/4-0/#/api/Ext.Ajax

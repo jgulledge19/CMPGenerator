@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model package="newsmanager" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM">
+	<object class="jgNewsStories" table="jg_news_story" extends="xPDOSimpleObject">
+		<aggregate alias="Category" class="jgNewsCategories" local="news_category_id" foreign="id" cardinality="one" owner="foreign" />
+		<field key="news_category_id" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+		<field key="web_user_id" dbtype="int" precision="8" attributes="unsigned" phptype="integer" null="false" default="0" />
+		<field key="start_date" dbtype="datetime" phptype="datetime" null="true" index="index" />
+		<field key="end_date" dbtype="datetime" phptype="datetime" null="true" index="index" />
+		<field key="edit_time" dbtype="datetime" phptype="datetime" null="false" />
+		<field key="sequence" dbtype="int" precision="8" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+		<field key="story_status" dbtype="set" precision="'live','replace','future','archive','deleted','tbd'" phptype="string" null="true" default="tbd" />
+		
+		<field key="resource_id" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="" />
+        <field key="url" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+		<field key="title" dbtype="varchar" precision="100" phptype="string" null="false" default="" index="index" />
+		<field key="excerpt" dbtype="text" phptype="string" null="false" default="" />
+		<field key="story_date" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="css_id" dbtype="varchar" precision="200" phptype="string" null="false" default="" />
+        <field key="css_class" dbtype="varchar" precision="200" phptype="string" null="false" default="" />
+        
+		<field key="icon" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+		<field key="file_size" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="true" default="" />
+		<field key="file_type" dbtype="varchar" precision="32" phptype="string" null="true" default="" />
+		
+	</object>
+	
+	<object class="jgNewsCategories" table="jg_news_category" extends="xPDOSimpleObject">
+		<composite alias="Story" class="jgNewsStories" local="id" foreign="news_category_id" cardinality="many" owner="local" />
+		<field key="title" dbtype="varchar" precision="128" phptype="string" null="false" default="" index="index" />
+		<field key="description" dbtype="mediumtext" phptype="string" null="false" />
+		<field key="instruction" dbtype="mediumtext" phptype="string" null="false" />
+        <field key="file_allowed" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
+		<field key="file_size_limit" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="" />
+		<field key="file_width" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="" />
+		<field key="story_limit" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="" />
+		
+	</object>
+	
+</model>
+

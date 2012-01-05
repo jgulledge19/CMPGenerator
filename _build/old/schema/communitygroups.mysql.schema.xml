@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="communitygroups" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" >
+
+    <!-- inherit the modx user and extend it -->
+    <object class="commUserProfile" table="user_attributes" extends="modUserProfile">
+        <composite alias="commMember" class="commMember" local="internalKey" foreign="user_id" cardinality="one" owner="local" />
+        
+    </object>
+    
+    <!--  comm_members 1 to 1 with user and user_attributes -->
+    <object class="commMember" table="comm_member" extends="xPDOSimpleObject">
+        <aggregate alias="commUserProfile" class="commUserProfile" local="user_id" foreign="internalKey" cardinality="one" owner="foreign" />
+        <field key="user_id" dbtype="int" precision="8" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="prefix" dbtype="varchar" precision="16" phptype="string" null="true" default="" />
+        <field key="first_name" dbtype="varchar" precision="64" phptype="string" null="true" default="" />
+        <field key="last_name" dbtype="varchar" precision="64" phptype="string" null="true" default="" />
+        <field key="crm_id" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+        <field key="title" dbtype="varchar" precision="128" phptype="string" null="true" default="" />
+        <field key="sec_title" dbtype="varchar" precision="128" phptype="string" null="true" default="" />
+        <field key="third_title" dbtype="varchar" precision="128" phptype="string" null="true" default="" />
+        <field key="office" dbtype="varchar" precision="128" phptype="string" null="true" default="" />
+        <field key="office_number" dbtype="varchar" precision="128" phptype="string" null="true" default="" />
+        <field key="campus" dbtype="varchar" precision="64" phptype="string" null="true" default="" />
+        <field key="default_group_id" dbtype="int" precision="8" attributes="unsigned" phptype="integer" null="false" default="0" />
+        <field key="viewable" dbtype="set" precision="'Yes','No'" phptype="string" null="true" default="Yes" />
+        <field key="profile_resource_id" dbtype="int" precision="8" attributes="unsigned" phptype="integer" null="false" default="0" />
+        
+        <!-- <aggregate alias="User" class="modUser" local="internalKey" foreign="id" cardinality="one" owner="foreign" />
+        -->
+    </object>
+    
+    <!-- comm_family 1 to many fam members (household) -->
+    
+    <!-- comm_family_members  many to many -->
+    
+    
+</model>

@@ -1,0 +1,5 @@
+Changelog for CMPGenerator
+
+CMPGenerator 1.0rc1
+================================================================
+- Initial public release

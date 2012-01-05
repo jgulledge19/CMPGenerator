@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="socialstream" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-subpackage="model">
+    
+    <object class="jgSocialAccounts" table="social_accounts" extends="xPDOSimpleObject">
+        <composite alias="Feed" class="jgSocialFeeds" local="id" foreign="social_account_id" cardinality="many" owner="local" />
+        <field key="username" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="service" dbtype="varchar" precision="255" phptype="string" null="true" default="" index="index" />
+        <field key="auto_approve" dbtype="varchar" precision="3" phptype="string" null="false" default="0" />
+        <field key="create_date" dbtype="datetime" phptype="datetime" null="true" />
+        <field key="active" dbtype="varchar" precision="3" phptype="string" null="false" default="1" />
+        <field key="get_feeds" dbtype="varchar" precision="3" phptype="string" null="true" default="1" />
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="description" dbtype="text" phptype="string" null="true" default="" />
+        <field key="feed_url" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="public_url" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="likes" dbtype="int" precision="12" phptype="int" null="true" default="" />
+        <field key="dislikes" dbtype="int" precision="12" phptype="int" null="true" default="" />
+        <field key="followers" dbtype="int" precision="12" phptype="int" null="true" default="" />
+        <field key="get_date" dbtype="int" precision="12" phptype="int" null="true" default="" />
+    </object>
+    
+    <object class="jgSocialFeeds" table="social_feeds" extends="xPDOSimpleObject">
+        <aggregate alias="Account" class="jgSocialAccounts" local="social_account_id" foreign="id" cardinality="one" owner="foreign" />
+        <field key="social_account_id" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
+        <field key="username" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="service" dbtype="varchar" precision="255" phptype="string" null="true" default="" index="index" />
+        <field key="post_date" dbtype="int" phptype="int" null="true" />
+        <field key="feed" dbtype="text" phptype="string" null="true" default="" />
+        <field key="html_feed" dbtype="text" phptype="string" null="true" default="" />
+        <field key="status" dbtype="varchar" precision="16" phptype="string" null="false" default="pending" />
+        <field key="post_url" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="author" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="email" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="copyright" dbtype="varchar" precision="64" phptype="string" null="true" default="" />
+        <field key="likes" dbtype="int" precision="12" phptype="int" null="true" default="0" />
+        <field key="dislikes" dbtype="int" precision="12" phptype="int" null="true" default="0" />
+        <field key="followers" dbtype="int" precision="12" phptype="int" null="true" default="0" />
+        <field key="post_id" dbtype="varchar" precision="32" phptype="string" null="true" default="0" />
+        <field key="source" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        
+    </object>
+    
+</model>

@@ -1,0 +1,79 @@
+
+ - rebuild scheme file
+ - rebuild xpdo classes
+ - regenerate code - future
+ - create MODX CMP folder struture? 
+ 
+TEST/Example
+1. Created table modx_test
+    See pic 
+2. Go to the Manager then CMPGenerator and click on Create Package
+    Fill in the table info we just created: See Pic
+3. Once you hit save all the files are created in /your MODX/core/components/mytest/ 
+    See Pic
+4. Now go lets see if this worked and create a simple snippet to test out our newly created table.:
+    Name it mytest
+    Code:
+<?php
+/**
+ * mytest table
+ */
+$output = '';// this is what the snippet will return
+
+// add package so xpdo can be used:
+$package_path = $modx->getOption('core_path').'components/mytest/model/';
+// see the scheme file and the xml model element and you will see the attribute package and that must match here
+$modx->addPackage('mytest', $package_path);
+
+// lets add some data!
+// see the scheme file and the xml object element and you will see the attribute class and that must match here
+$myRow = $modx->newObject('Test');
+
+$data = array(
+        'name' => 'MODX Revolution',
+        'description' => 'A great CMS product...'
+    );
+$myRow->fromArray($data);
+
+if ( !$myRow->save() ) {
+    $output .= '<p>Could not create row</p>';
+} else {
+    $output .= '<p>Created row successfully</p>';
+}
+
+// now lets show the data in a quick and dirty table:
+$output .= '
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>';
+    
+// Note for all HTML you should be using Chunks see: 
+/* build query */
+$query = $modx->newQuery('Test');
+$rows = $modx->getIterator('Test', $query);
+
+/* iterate */
+$list = array();
+foreach ($rows as $row) {
+    // from object to array you can also do $row->get('name');
+    $row_array = $row->toArray();
+    
+    $output .= '
+    <tr>
+        <td>'.$row_array['id'].'</td>
+        <td>'.$row_array['name'].'</td>
+        <td>'.$row_array['description'].'</td>
+    </tr>'; 
+}
+$output .= '
+</table>';
+
+return $output;
+
+
+5. Now put the snippet in a resource and run it a few times.
+    You should see something like this (note my test page has CSS assigned to tables):
+    
