@@ -17,6 +17,7 @@ if (empty($cmp)) return $modx->error->failure($modx->lexicon('cmpgenerator.err_n
 unset($_DATA['create_date']);
 $cmp->fromArray($_DATA);
 
+// return $modx->error->failure('build_scheme: '.$_DATA['build_scheme'].' - '.$cmp->get('build_scheme') );
 /* save */
 if ($cmp->save() == false) {
     return $modx->error->failure($modx->lexicon('cmpgenerator.err_save'));

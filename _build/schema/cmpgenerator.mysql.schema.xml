@@ -4,8 +4,8 @@
         <field key="package" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
         <field key="tables" dbtype="text" phptype="string" null="true" default="" />
         <field key="table_prefix" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
-        <field key="build_scheme" dbtype="varchar" precision="1" phptype="string" null="true" default="1" />
-        <field key="build_package" dbtype="varchar" precision="1" phptype="string" null="true" default="1" />
+        <field key="build_scheme" dbtype="int" precision="1" phptype="boolean" null="true" default="1" />
+        <field key="build_package" dbtype="int" precision="1" phptype="boolean" null="true" default="1" />
         <field key="create_date" dbtype="datetime" phptype="datetime" null="true" />
         <field key="last_ran" dbtype="datetime" phptype="datetime" null="true" />
         

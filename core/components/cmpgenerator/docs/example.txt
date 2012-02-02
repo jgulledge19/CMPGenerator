@@ -50,7 +50,7 @@ $output .= '
         <th>Description</th>
     </tr>';
     
-// Note for all HTML you should be using Chunks see: 
+// Note for all HTML you should be using Chunks see: http://rtfm.modx.com/display/revolution20/Chunks#Chunks-ProcessingChunkviatheAPI
 /* build query */
 $query = $modx->newQuery('Test');
 $rows = $modx->getIterator('Test', $query);

@@ -52,7 +52,7 @@
 define('PKG_NAME','CMPGenerator');
 define('PKG_NAME_LOWER','cmpgenerator');
 define('PKG_VERSION','1.0.0');
-define('PKG_RELEASE','rc');
+define('PKG_RELEASE','pl');
 define('PKG_CATEGORY','CMPGenerator');
 
 /* Set package options - you can turn these on one-by-one

@@ -1,5 +1,9 @@
 Changelog for CMPGenerator
 
+CMPGenerator 1.0pl
+===============================================
+[#1] Fix Yes/No options to understand foreign languages
+
 CMPGenerator 1.0rc1
-================================================================
+===============================================
 - Initial public release

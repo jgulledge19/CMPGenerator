@@ -54,18 +54,19 @@ $cmp->fromArray($scriptProperties);
 
 $scheme = $cmp->get('build_scheme');
 /* set fields */
-if ( $scheme == 'Yes' ) {
+if ( $scheme == 'Yes' || $scriptProperties['build_scheme'] == $modx->lexicon('yes') ) {
     $cmp->set('build_scheme', '1');
 } else {
     $cmp->set('build_scheme', '0');
 }
-if ( $cmp->get('build_package') == 'Yes' ) {
+if ( $cmp->get('build_package') == 'Yes' || $scriptProperties['build_package'] == $modx->lexicon('yes') ) {
     $cmp->set('build_package', '1');
 } else {
     $cmp->set('build_package', '0');
 }
 
 // echo 'Scheme: '.$cmp->get('build_scheme').'  ';
+//return $modx->error->failure('build_scheme: '.$scriptProperties['build_scheme'].' - '.$cmp->get('build_scheme') );
 
 /* save */
 if ($cmp->save() == false) {

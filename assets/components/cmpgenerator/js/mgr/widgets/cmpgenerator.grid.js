@@ -1,4 +1,37 @@
-/* YOU will need to edit this file with proper names, follow the cases(upper/lower) */
+/* make a local <select>/combo box */
+// create the data store
+/*
+var YesNoData = new Ext.data.SimpleStore({
+    fields: [
+       {name: 'id'},
+       {name: 'name'}
+    ]
+});
+var myData = [
+    [1, _('yes')],
+    [0, _('no')]
+];
+YesNoData.loadData(myData);
+
+Cmp.combo.YesNo = function(config) {
+    config = config || {};
+    Ext.applyIf(config,{
+        displayField: 'name'
+        ,valueField: 'id'
+        ,fields: ['id', 'name']
+        ,store: myData // [{id: 1, name: _('yes')}, {id: 0, name: _('no')} ]
+        //,url: Testapp.config.connectorUrl
+        ,baseParams: { action: '' ,combo: true }
+        ,mode: 'local'
+        ,editable: false
+    });
+    Cmp.combo.YesNo.superclass.constructor.call(this,config);
+};
+//Ext.extend(MODx.combo.SlideStatus, MODx.combo.ComboBox);
+Ext.extend(Cmp.combo.YesNo,MODx.combo.ComboBox);
+Ext.reg('yesno-combo', Cmp.combo.YesNo);
+*/
+
 Cmp.grid.CmpGenerator = function(config) {
     config = config || {};
     Ext.applyIf(config,{
@@ -40,13 +73,17 @@ Cmp.grid.CmpGenerator = function(config) {
             ,dataIndex: 'build_scheme'
             ,sortable: true
             ,width: 20
-            ,editor: { xtype: 'combo-boolean' ,renderer: 'boolean' }
+            //,editor: { xtype: 'combo-boolean' ,renderer: 'boolean' }
+            ,renderer: this.renderYNfield.createDelegate(this,[this],true)
+            ,editor: { xtype: 'combo-boolean' }
         },{
             header: _('cmpgenerator.build_package')
             ,dataIndex: 'build_package'
             ,sortable: true
             ,width: 20
-            ,editor: { xtype: 'combo-boolean' ,renderer: 'boolean' }
+            //,editor: { xtype: 'combo-boolean' ,renderer: 'boolean' }
+            ,renderer: this.renderYNfield.createDelegate(this,[this],true)
+            ,editor: { xtype: 'combo-boolean' }
         },{
             header: _('cmpgenerator.create_date')
             ,dataIndex: 'create_date'
@@ -145,13 +182,18 @@ Ext.extend(Cmp.grid.CmpGenerator,MODx.grid.Grid,{
                 'success': {fn:this.refresh,scope:this}
             }
         });
+    },
+    renderYNfield: function(v,md,rec,ri,ci,s,g) {
+        var r = s.getAt(ri).data;
+        v = Ext.util.Format.htmlEncode(v);
+        var f = MODx.grid.Grid.prototype.rendYesNo;
+        return f(v,md,rec,ri,ci,s,g);
     }
 });
 Ext.reg('cmp-grid-cmpgenerator',Cmp.grid.CmpGenerator);
 
-
 Cmp.window.BuildCmp = function(config) {
-    console.log('Update');
+    //console.log('Update');
     config = config || {};
     Ext.applyIf(config,{
         title: _('cmpgenerator.build')
@@ -189,7 +231,7 @@ Cmp.window.BuildCmp = function(config) {
             ,name: 'build_scheme'
             ,width: 100
             ,'default': 1
-            ,xtype: 'combo-boolean'
+            ,xtype: 'combo-boolean' //'yesno-combo'// 
             ,renderer: 'boolean'
         },{
             fieldLabel: _('cmpgenerator.build_package')
@@ -201,7 +243,7 @@ Cmp.window.BuildCmp = function(config) {
         }]
     });
     Cmp.window.BuildCmp.superclass.constructor.call(this,config);
-    console.log('Build Assign');
+    //console.log('Build Assign');
 };
 Ext.extend(Cmp.window.BuildCmp,MODx.Window);
 Ext.reg('cmp-window-cmpgenerator-build',Cmp.window.BuildCmp);
