@@ -1,8 +1,8 @@
 --------------------
 CMPGenerator
 --------------------
-Version: 1.0.0 pl
-Date: Febraury 3, 2012
+Version: 1.1.0 pl
+Date: March 14, 2012
 Author: Joshua Gulledge (jgulledge19@hotmail.com)
 License: GNU GPLv2 (or later at your option)
 

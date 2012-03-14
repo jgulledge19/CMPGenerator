@@ -17,7 +17,7 @@ if (empty($scriptProperties['package']) ) {
 if (empty($scriptProperties['tables']) ) {
     $modx->error->addField('tables',$modx->lexicon('cmpgenerator.err_required'));
 }
-if (empty($scriptProperties['table_prefix']) ) {
+if (empty($scriptProperties['database']) && empty($scriptProperties['table_prefix']) ) {
     $modx->error->addField('table_prefix',$modx->lexicon('cmpgenerator.err_required'));
 }
 if ($modx->error->hasError()) {
@@ -163,6 +163,13 @@ if ($loaded) {
     // (re)Build the schema file
     // echo 'Scheme: '.$cmp->get('build_scheme');
     if ( $cmp->get('build_scheme') ) {
+        // set the db:
+        $dbname = $cmp->get('database');
+        $generator->setDatabase($dbname);
+        $prefix = $cmp->get('table_prefix');
+        if ( !empty($dbname) && empty($prefix) ) {
+            $restrict_prefix = false;
+        }
         // now generate the scheme
         $xml = $generator->writeTableSchema($xml_schema_file, $package_name, 'xPDOObject', $table_prefix, $restrict_prefix);
     }

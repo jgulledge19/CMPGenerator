@@ -55,17 +55,9 @@ if ($object->xpdo) {
         case xPDOTransport::ACTION_INSTALL:
             break;
         case xPDOTransport::ACTION_UPGRADE:
-            /*
-            $modx->exec("ALTER TABLE {$modx->getTableName('ChurchEvents')} 
-                DROP COLUMN `locations`,
-                ADD COLUMN `prominent` SET('Yes','No') DEFAULT 'No' NULL AFTER `web_user_id`,
-                ADD COLUMN `personal_subscribers` TEXT NULL AFTER `contact_phone`,
-                ADD COLUMN `extended` TEXT NULL AFTER `country`,
-                CHANGE `public_desc` `public_desc` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL ,
-                CHANGE `notes` `notes` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL ,
-                CHANGE `office_notes` `office_notes` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL ,
-                ADD COLUMN `exceptions` TEXT NULL AFTER `days`
-                ");*/
+            $modx->exec("ALTER TABLE {$modx->getTableName('CmpGenerator')} 
+                ADD COLUMN `database` VARCHAR(128) NULL AFTER `package`;
+                ");
             break;
     }
 }

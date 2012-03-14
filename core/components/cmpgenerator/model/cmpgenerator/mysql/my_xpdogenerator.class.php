@@ -29,6 +29,24 @@ class my_xPDOGenerator_mysql extends xPDOGenerator_mysql {
     protected $allowed_tables;
     
     /**
+     * active data base to connect to
+     * @var (String) $database
+     */
+    protected $databaseName;
+    
+    /**
+     * set the database
+     * 
+     */
+    public function setDatabase($database=NULL) {
+        if (empty($database) ) {
+            $this->databaseName = $this->manager->xpdo->escape($this->manager->xpdo->config['dbname']);
+        } else {
+            $this->databaseName = $database;
+        }
+    }
+    
+    /**
      * set the allowed tables
      * 
      */
@@ -72,12 +90,15 @@ class my_xPDOGenerator_mysql extends xPDOGenerator_mysql {
         $xmlContent[] = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
         $xmlContent[] = "<model package=\"{$package}\" baseClass=\"{$baseClass}\" platform=\"mysql\" defaultEngine=\"MyISAM\" version=\"{$schemaVersion}\">";
         //read list of tables
-        $dbname= $this->manager->xpdo->escape($this->manager->xpdo->config['dbname']);
+        $dbname = $this->databaseName; 
+        //$this->manager->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Database name: ' . $dbname);
         $tableLike= ($tablePrefix && $restrictPrefix) ? " LIKE '{$tablePrefix}%'" : '';
         $tablesStmt= $this->manager->xpdo->prepare("SHOW TABLES FROM {$dbname}{$tableLike}");
         $tablesStmt->execute();
         $tables= $tablesStmt->fetchAll(PDO::FETCH_NUM);
-        if ($this->manager->xpdo->getDebug() === true) $this->manager->xpdo->log(xPDO::LOG_LEVEL_DEBUG, print_r($tables, true));
+        if ($this->manager->xpdo->getDebug() === true) {
+            $this->manager->xpdo->log(xPDO::LOG_LEVEL_DEBUG, print_r($tables, true));
+        }
         foreach ($tables as $table) {
             $xmlObject= array();
             $xmlFields= array();
@@ -85,9 +106,11 @@ class my_xPDOGenerator_mysql extends xPDOGenerator_mysql {
             // the only thing added to this function the rest is copied:
             if ( !in_array($table[0],$this->allowed_tables) ) {
                 //echo '<br>No Table: '.$table[0];
+                //$this->manager->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'No Table: '.$table[0]);
                 continue;
             }
             //echo '<br>Table: '. $table[0];
+            //$this->manager->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Table: '.$table[0].' - Pre: '.$tablePrefix.' - Restrict: '.$restrictPrefix );
             
             // End custom
             if (!$tableName= $this->getTableName($table[0], $tablePrefix, $restrictPrefix)) {
@@ -95,7 +118,9 @@ class my_xPDOGenerator_mysql extends xPDOGenerator_mysql {
             }
             $class= $this->getClassName($tableName);
             $extends= $baseClass;
-            $fieldsStmt= $this->manager->xpdo->query('SHOW COLUMNS FROM ' . $this->manager->xpdo->escape($table[0]));
+            $sql = 'SHOW COLUMNS FROM '.$this->manager->xpdo->escape($dbname).'.'.$this->manager->xpdo->escape($table[0]);
+            //$this->manager->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Line: '.__LINE__.' Sql: '.$sql);
+            $fieldsStmt= $this->manager->xpdo->query($sql);
             if ($fieldsStmt) {
                 $fields= $fieldsStmt->fetchAll(PDO::FETCH_ASSOC);
                 if ($this->manager->xpdo->getDebug() === true) $this->manager->xpdo->log(xPDO::LOG_LEVEL_DEBUG, print_r($fields, true));
@@ -146,7 +171,7 @@ class my_xPDOGenerator_mysql extends xPDOGenerator_mysql {
                 $this->manager->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Error retrieving columns for table ' .  $table[0]);
             }
             $whereClause= ($extends === 'xPDOSimpleObject' ? " WHERE `Key_name` != 'PRIMARY'" : '');
-            $indexesStmt= $this->manager->xpdo->query('SHOW INDEXES FROM ' . $this->manager->xpdo->escape($table[0]) . $whereClause);
+            $indexesStmt= $this->manager->xpdo->query('SHOW INDEXES FROM '.$this->manager->xpdo->escape($dbname).'.'.$this->manager->xpdo->escape($table[0]) . $whereClause);
             if ($indexesStmt) {
                 $indexes= $indexesStmt->fetchAll(PDO::FETCH_ASSOC);
                 if ($this->manager->xpdo->getDebug() === true) $this->manager->xpdo->log(xPDO::LOG_LEVEL_DEBUG, "Indices for table {$table[0]}: " . print_r($indexes, true));

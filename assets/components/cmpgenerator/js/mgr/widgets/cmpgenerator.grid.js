@@ -39,7 +39,7 @@ Cmp.grid.CmpGenerator = function(config) {
         ,url: Cmp.config.connectorUrl
         ,baseParams: { action: 'mgr/cmpgenerator/getList' }
         ,save_action: 'mgr/cmpgenerator/updateFromGrid'
-        ,fields: ['id','package', 'tables', 'table_prefix','build_scheme', 'build_package','create_date','last_ran']
+        ,fields: ['id','package', 'database', 'tables', 'table_prefix','build_scheme', 'build_package','create_date','last_ran']
         ,paging: true
         ,autosave: true
         ,remoteSort: true
@@ -54,7 +54,13 @@ Cmp.grid.CmpGenerator = function(config) {
             header: _('cmpgenerator.package')
             ,dataIndex: 'package'
             ,sortable: true
-            ,width: 60
+            ,width: 40
+            ,editor: { xtype: 'textfield' }
+        },{
+            header: _('cmpgenerator.database')
+            ,dataIndex: 'database'
+            ,sortable: true
+            ,width: 40
             ,editor: { xtype: 'textfield' }
         },{
             header: _('cmpgenerator.tables')
@@ -88,12 +94,12 @@ Cmp.grid.CmpGenerator = function(config) {
             header: _('cmpgenerator.create_date')
             ,dataIndex: 'create_date'
             ,sortable: true
-            ,width: 50
+            ,width: 40
         },{
             header: _('cmpgenerator.last_ran')
             ,dataIndex: 'last_ran'
             ,sortable: true
-            ,width: 50
+            ,width: 40
         }]
         ,tbar: [{
             xtype: 'textfield'
@@ -208,6 +214,13 @@ Cmp.window.BuildCmp = function(config) {
             xtype: 'textfield'
             ,fieldLabel: _('cmpgenerator.package')
             ,name: 'package'
+            ,width: 300
+            ,disable: true
+            ,editable: false
+        },{
+            xtype: 'textfield'
+            ,fieldLabel: _('cmpgenerator.database')
+            ,name: 'database'
             ,width: 300
             ,disable: true
             ,editable: false

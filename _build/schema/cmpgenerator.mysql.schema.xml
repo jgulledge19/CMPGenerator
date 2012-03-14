@@ -2,6 +2,7 @@
 <model package="cmpgenerator" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-subpackage="model">
     <object class="CmpGenerator" table="cmpgenerator" extends="xPDOSimpleObject">
         <field key="package" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
+        <field key="database" dbtype="varchar" precision="128" phptype="string" null="true" default="" />
         <field key="tables" dbtype="text" phptype="string" null="true" default="" />
         <field key="table_prefix" dbtype="varchar" precision="255" phptype="string" null="true" default="" />
         <field key="build_scheme" dbtype="int" precision="1" phptype="boolean" null="true" default="1" />

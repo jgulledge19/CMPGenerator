@@ -12,6 +12,7 @@ $_lang['cmpgenerator.management'] = 'CMP Generator';
 $_lang['cmpgenerator.management_desc'] = 'Generate CMP Code';
 
 $_lang['cmpgenerator.package'] = 'Package Name';
+$_lang['cmpgenerator.database'] = 'Database Name';
 $_lang['cmpgenerator.tables'] = 'Tables';
 $_lang['cmpgenerator.table_prefix'] = 'Prefix';
 $_lang['cmpgenerator.build_scheme'] = 'Build Schema';
@@ -24,6 +25,7 @@ $_lang['cmpgenerator.err_nf'] = 'CMP Package not found.';
 $_lang['cmpgenerator.err_ae'] = 'A CMP Package with that name already exists.';
 $_lang['cmpgenerator.err_ns'] = 'CMP Package name not specified.';
 $_lang['cmpgenerator.err_ns_name'] = 'Please specify a package name for the CMP.';
+$_lang['cmpgenerator.err_required'] = 'This field is required';
 $_lang['cmpgenerator.err_remove'] = 'An error occurred while trying to remove the CMP Package.';
 $_lang['cmpgenerator.err_save'] = 'An error occurred while trying to save.';
 $_lang['cmpgenerator.remove'] = 'Remove CMP Package';

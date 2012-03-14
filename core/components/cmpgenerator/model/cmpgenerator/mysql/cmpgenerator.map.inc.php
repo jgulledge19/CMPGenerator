@@ -5,6 +5,7 @@ $xpdo_meta_map['CmpGenerator']= array (
   'fields' => 
   array (
     'package' => '',
+    'database' => '',
     'tables' => '',
     'table_prefix' => '',
     'build_scheme' => '1',
@@ -18,6 +19,14 @@ $xpdo_meta_map['CmpGenerator']= array (
     array (
       'dbtype' => 'varchar',
       'precision' => '255',
+      'phptype' => 'string',
+      'null' => true,
+      'default' => '',
+    ),
+    'database' => 
+    array (
+      'dbtype' => 'varchar',
+      'precision' => '128',
       'phptype' => 'string',
       'null' => true,
       'default' => '',
