@@ -75,14 +75,17 @@ if ($cmp->save() == false) {
 
 // 1 delete all files for testing:
 function rmdir_files($dir) {
-    foreach( glob( $dir . '*', GLOB_MARK ) as $file) {
-        if (is_dir($file)) {
-            rmdir_files($file."/");
-            if( is_dir($file) ) {
-                rmdir($file);
+    $glob = glob( $dir . '*', GLOB_MARK );
+    if (is_array($glob)) {
+        foreach($glob as $file) {
+            if (is_dir($file)) {
+                rmdir_files($file."/");
+                if( is_dir($file) ) {
+                    rmdir($file);
+                }
+            } elseif( is_file($file) )  {
+                unlink($file);
             }
-        } elseif( is_file($file) )  {
-            unlink($file);
         }
     }
     if (is_dir($dir) ){
