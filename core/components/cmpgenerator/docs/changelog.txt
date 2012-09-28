@@ -1,6 +1,10 @@
 Changelog for CMPGenerator
 
 
+CMPGenerator 1.1.1pl
+============================
+Fixed #3 of possible minor error in foreach 
+
 CMPGenerator 1.1.0pl
 ============================
 added #2 Support for Foreign Databases

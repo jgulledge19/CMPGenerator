@@ -33,6 +33,9 @@ How to use
     and set Build Package to Yes and save.
 
 
-
+Example of schema and foreign DB:
+- http://devtrench.com/posts/first-impressions-of-xpdo-wordpress-to-modx-migration-tool
+- http://devtrench.com/posts/wordpress-to-modx-migration-part-2-schema-relationships-and-comments
+- http://devtrench.com/posts/wordpress-to-modx-migration-part-3-templates-categories-and-postmeta
 
 
