@@ -26,6 +26,10 @@ if ($modx->error->hasError()) {
 /* package, tables, table_classes - auto generated, prefix, build_scheme, build_package */
 $package_name = $scriptProperties['package'];
 $my_tables = explode(',', $scriptProperties['tables']);
+// Remove whitespaces
+foreach($my_tables as &$my_table){
+    $my_table = trim($my_table);
+}
 // If your tables use a prefix, this will help identify them and it ensures that
 // the class names appear "clean", without the prefix.
 $table_prefix = $scriptProperties['table_prefix']; //$modx->config['table_prefix'];
