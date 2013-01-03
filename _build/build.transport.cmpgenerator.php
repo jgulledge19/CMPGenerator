@@ -51,7 +51,7 @@
 /* Set package info be sure to set all of these */
 define('PKG_NAME','CMPGenerator');
 define('PKG_NAME_LOWER','cmpgenerator');
-define('PKG_VERSION','1.1.1');
+define('PKG_VERSION','1.1.3');
 define('PKG_RELEASE','pl');
 define('PKG_CATEGORY','CMPGenerator');
 

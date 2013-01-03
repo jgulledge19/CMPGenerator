@@ -29,6 +29,7 @@ $my_tables = explode(',', $scriptProperties['tables']);
 // Remove whitespaces
 foreach($my_tables as &$my_table){
     $my_table = trim($my_table);
+    //$modx->error();
 }
 // If your tables use a prefix, this will help identify them and it ensures that
 // the class names appear "clean", without the prefix.

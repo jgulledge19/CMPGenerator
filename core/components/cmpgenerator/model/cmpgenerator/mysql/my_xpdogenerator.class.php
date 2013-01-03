@@ -106,11 +106,11 @@ class my_xPDOGenerator_mysql extends xPDOGenerator_mysql {
             // the only thing added to this function the rest is copied:
             if ( !in_array($table[0],$this->allowed_tables) ) {
                 //echo '<br>No Table: '.$table[0];
-                //$this->manager->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'No Table: '.$table[0]);
+                //$this->manager->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'CMPGenerator->my_oPDO0->writeTableSchema -> No Table: '.$table[0]);
                 continue;
             }
             //echo '<br>Table: '. $table[0];
-            //$this->manager->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'Table: '.$table[0].' - Pre: '.$tablePrefix.' - Restrict: '.$restrictPrefix );
+            //$this->manager->xpdo->log(xPDO::LOG_LEVEL_ERROR, 'CMPGenerator->my_oPDO0->writeTableSchema -> Table: '.$table[0].' - Pre: '.$tablePrefix.' - Restrict: '.$restrictPrefix );
             
             // End custom
             if (!$tableName= $this->getTableName($table[0], $tablePrefix, $restrictPrefix)) {

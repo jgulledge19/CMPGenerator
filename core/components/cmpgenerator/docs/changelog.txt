@@ -1,5 +1,12 @@
 Changelog for CMPGenerator
 
+CMPGenerator 1.1.3pl - 1/3/2013
+============================
+Uploaded the changed file for 1.1.2pl!
+
+CMPGenerator 1.1.2pl - 1/2/2013
+============================
+Fixed #5 removed white space form tablename input 
 
 CMPGenerator 1.1.1pl
 ============================
