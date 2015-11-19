@@ -84,7 +84,7 @@ class my_xPDOGenerator_mysql extends xPDOGenerator_mysql {
         if (empty ($baseClass))
             $baseClass= 'xPDOObject';
         if (empty ($tablePrefix))
-            $tablePrefix= $this->manager->xpdo->config[xPDO::OPT_TABLE_PREFIX];
+            //$tablePrefix= $this->manager->xpdo->config[xPDO::OPT_TABLE_PREFIX];
         $schemaVersion = xPDO::SCHEMA_VERSION;
         $xmlContent = array();
         $xmlContent[] = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
